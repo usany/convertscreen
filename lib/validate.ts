@@ -1,5 +1,5 @@
-import { ACCEPTED_EXTENSIONS, MAX_FILE_SIZE, MAX_FILES, MAX_TOTAL_SIZE } from './constants';
-import type { MarkdownFile, RejectedFile } from './types';
+import { ACCEPTED_EXTENSIONS, MAX_FILE_SIZE, MAX_FILES, MAX_TOTAL_SIZE } from "./constants";
+import type { MarkdownFile, RejectedFile } from "./types";
 
 export interface ValidationResult {
   accepted: File[];
@@ -21,15 +21,13 @@ export function validateFiles(files: File[], existing: MarkdownFile[] = []): Val
     const key = `${file.name}:${file.size}`;
 
     if (!hasMarkdownExtension(file.name)) {
-      rejected.push({ name: file.name, reason: 'invalid-extension' });
-    } else if (seen.has(key)) {
-      rejected.push({ name: file.name, reason: 'duplicate' });
+      rejected.push({ name: file.name, reason: "invalid-extension" });
     } else if (file.size > MAX_FILE_SIZE) {
-      rejected.push({ name: file.name, reason: 'file-too-large' });
+      rejected.push({ name: file.name, reason: "file-too-large" });
     } else if (count >= MAX_FILES) {
-      rejected.push({ name: file.name, reason: 'too-many-files' });
+      rejected.push({ name: file.name, reason: "too-many-files" });
     } else if (totalSize + file.size > MAX_TOTAL_SIZE) {
-      rejected.push({ name: file.name, reason: 'total-too-large' });
+      rejected.push({ name: file.name, reason: "total-too-large" });
     } else {
       accepted.push(file);
       seen.add(key);

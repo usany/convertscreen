@@ -1,5 +1,5 @@
-import { renderMarkdown } from '@/lib/markdown';
-import type { MarkdownFile } from '@/lib/types';
+import { renderMarkdown } from "@/lib/markdown";
+import type { MarkdownFile } from "@/lib/types";
 
 export interface PreviewAreaProps {
   file: MarkdownFile | null;

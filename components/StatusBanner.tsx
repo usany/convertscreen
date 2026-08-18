@@ -1,14 +1,14 @@
-import type { BannerState } from '@/lib/types';
+import type { BannerState } from "@/lib/types";
 
 export interface StatusBannerProps {
   banner: BannerState | null;
   onDismiss: () => void;
 }
 
-const ICONS: Record<BannerState['variant'], string> = {
-  info: 'i',
-  success: '✓',
-  error: '!',
+const ICONS: Record<BannerState["variant"], string> = {
+  info: "i",
+  success: "✓",
+  error: "!",
 };
 
 export function StatusBanner({ banner, onDismiss }: StatusBannerProps) {
@@ -20,13 +20,13 @@ export function StatusBanner({ banner, onDismiss }: StatusBannerProps) {
     <div
       data-testid="status-banner"
       data-variant={variant}
-      role={variant === 'error' ? 'alert' : 'status'}
+      role={variant === "error" ? "alert" : "status"}
       className={[
-        'flex items-start gap-3 rounded-xl border p-4 shadow-sm',
-        'data-[variant=info]:border-slate-200 data-[variant=info]:bg-slate-50 data-[variant=info]:text-slate-800',
-        'data-[variant=success]:border-emerald-200 data-[variant=success]:bg-emerald-50 data-[variant=success]:text-emerald-900',
-        'data-[variant=error]:border-rose-200 data-[variant=error]:bg-rose-50 data-[variant=error]:text-rose-900',
-      ].join(' ')}
+        "flex items-start gap-3 rounded-xl border p-4 shadow-sm",
+        "data-[variant=info]:border-slate-200 data-[variant=info]:bg-slate-50 data-[variant=info]:text-slate-800",
+        "data-[variant=success]:border-emerald-200 data-[variant=success]:bg-emerald-50 data-[variant=success]:text-emerald-900",
+        "data-[variant=error]:border-rose-200 data-[variant=error]:bg-rose-50 data-[variant=error]:text-rose-900",
+      ].join(" ")}
     >
       <span
         aria-hidden="true"

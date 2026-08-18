@@ -1,4 +1,4 @@
-import type { ConversionStatus } from '@/lib/types';
+import type { ConversionStatus } from "@/lib/types";
 
 export interface ConvertButtonProps {
   fileCount: number;
@@ -7,9 +7,9 @@ export interface ConvertButtonProps {
 }
 
 export function ConvertButton({ fileCount, status, onConvert }: ConvertButtonProps) {
-  const isConverting = status === 'converting';
+  const isConverting = status === "converting";
   // Built from a whole word, not stem + "s" — the singular label must not contain "files".
-  const noun = fileCount === 1 ? 'file' : 'files';
+  const noun = fileCount === 1 ? "file" : "files";
 
   return (
     <button
@@ -19,12 +19,12 @@ export function ConvertButton({ fileCount, status, onConvert }: ConvertButtonPro
       aria-busy={isConverting}
       onClick={onConvert}
       className={[
-        'inline-flex min-w-56 items-center justify-center gap-2 rounded-lg bg-indigo-600 px-5 py-3',
-        'text-sm font-semibold text-white shadow-sm transition-colors',
-        'hover:bg-indigo-500',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2',
-        'disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-600',
-      ].join(' ')}
+        "inline-flex min-w-56 items-center justify-center gap-2 rounded-lg bg-indigo-600 px-5 py-3",
+        "text-sm font-semibold text-white shadow-sm transition-colors",
+        "hover:bg-indigo-500",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2",
+        "disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-600",
+      ].join(" ")}
     >
       {isConverting ? (
         <>

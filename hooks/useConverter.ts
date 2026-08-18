@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useCallback, useState } from 'react';
+import { useCallback, useState } from "react";
 
-import { REJECTION_MESSAGES } from '@/lib/constants';
-import { convertMarkdownToPdf } from '@/lib/convertMarkdownToPdf';
-import { readMarkdownFiles } from '@/lib/readFiles';
-import { reorderFiles } from '@/lib/reorder';
-import type { BannerState, ConversionStatus, MarkdownFile, RejectedFile } from '@/lib/types';
-import { validateFiles } from '@/lib/validate';
+import { REJECTION_MESSAGES } from "@/lib/constants";
+import { convertMarkdownToPdf } from "@/lib/convertMarkdownToPdf";
+import { readMarkdownFiles } from "@/lib/readFiles";
+import { reorderFiles } from "@/lib/reorder";
+import type { BannerState, ConversionStatus, MarkdownFile, RejectedFile } from "@/lib/types";
+import { validateFiles } from "@/lib/validate";
 
 export interface UseConverter {
   files: MarkdownFile[];
@@ -22,14 +22,14 @@ export interface UseConverter {
   dismissBanner: () => void;
 }
 
-const DOWNLOAD_FILENAME = 'converted.pdf';
+const DOWNLOAD_FILENAME = "converted.pdf";
 
 const describe = (rejected: RejectedFile[]) =>
   rejected.map((file) => `${file.name} — ${REJECTION_MESSAGES[file.reason]}`);
 
 function triggerDownload(blob: Blob) {
   const url = URL.createObjectURL(blob);
-  const anchor = document.createElement('a');
+  const anchor = document.createElement("a");
   anchor.href = url;
   anchor.download = DOWNLOAD_FILENAME;
   document.body.appendChild(anchor);
@@ -41,7 +41,7 @@ function triggerDownload(blob: Blob) {
 export function useConverter(): UseConverter {
   const [files, setFiles] = useState<MarkdownFile[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
-  const [status, setStatus] = useState<ConversionStatus>('idle');
+  const [status, setStatus] = useState<ConversionStatus>("idle");
   const [banner, setBanner] = useState<BannerState | null>(null);
 
   const addFiles = useCallback(
@@ -59,16 +59,16 @@ export function useConverter(): UseConverter {
         return;
       }
 
-      const noun = rejected.length === 1 ? 'file' : 'files';
+      const noun = rejected.length === 1 ? "file" : "files";
       setBanner(
         read.length === 0
           ? {
-              variant: 'error',
+              variant: "error",
               message: `${rejected.length} ${noun} could not be added.`,
               details: describe(rejected),
             }
           : {
-              variant: 'info',
+              variant: "info",
               message: `Added ${read.length} of ${read.length + rejected.length} files.`,
               details: describe(rejected),
             },
@@ -97,7 +97,7 @@ export function useConverter(): UseConverter {
   const convert = useCallback(async () => {
     if (files.length === 0) return;
 
-    setStatus('converting');
+    setStatus("converting");
     setBanner(null);
 
     try {
@@ -107,16 +107,16 @@ export function useConverter(): UseConverter {
       );
 
       triggerDownload(pdfBlob);
-      setStatus('success');
+      setStatus("success");
       setBanner({
-        variant: 'success',
+        variant: "success",
         message: `${DOWNLOAD_FILENAME} is ready in your downloads.`,
       });
     } catch (error) {
-      setStatus('error');
+      setStatus("error");
       setBanner({
-        variant: 'error',
-        message: error instanceof Error ? error.message : 'Conversion failed.',
+        variant: "error",
+        message: error instanceof Error ? error.message : "Conversion failed.",
       });
     }
   }, [files]);

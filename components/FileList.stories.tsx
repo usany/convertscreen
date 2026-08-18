@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import { expect, fn, userEvent, within } from 'storybook/test';
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { expect, fn, userEvent, within } from "storybook/test";
 
-import { FileList } from './FileList';
-import { chapterFile, introFile, threeFiles } from './story-fixtures';
+import { FileList } from "./FileList";
+import { chapterFile, introFile, threeFiles } from "./story-fixtures";
 
 const meta = {
-  title: 'Converter/FileList',
+  title: "Converter/FileList",
   component: FileList,
   args: {
     files: threeFiles,
@@ -16,25 +16,25 @@ const meta = {
   },
   argTypes: {
     files: {
-      description: 'Current order — this *is* the PDF page order.',
-      table: { category: 'Data' },
+      description: "Current order — this *is* the PDF page order.",
+      table: { category: "Data" },
     },
     activeId: {
-      description: 'Id of the file shown in `PreviewArea`, or `null`.',
-      control: 'text',
-      table: { category: 'State' },
+      description: "Id of the file shown in `PreviewArea`, or `null`.",
+      control: "text",
+      table: { category: "State" },
     },
     disabled: {
-      description: 'Freezes the list during conversion; disables every handle and remove button.',
-      control: 'boolean',
-      table: { category: 'State' },
+      description: "Freezes the list during conversion; disables every handle and remove button.",
+      control: "boolean",
+      table: { category: "State" },
     },
     onReorder: {
-      description: 'Receives **indices**, `(fromIndex, toIndex)` — not dnd-kit ids.',
-      table: { category: 'Events' },
+      description: "Receives **indices**, `(fromIndex, toIndex)` — not dnd-kit ids.",
+      table: { category: "Events" },
     },
-    onRemove: { description: 'Called with the removed file id.', table: { category: 'Events' } },
-    onSelect: { description: 'Called with the clicked file id.', table: { category: 'Events' } },
+    onRemove: { description: "Called with the removed file id.", table: { category: "Events" } },
+    onSelect: { description: "Called with the clicked file id.", table: { category: "Events" } },
   },
   decorators: [
     (Story) => (
@@ -47,19 +47,19 @@ const meta = {
     docs: {
       description: {
         component: [
-          'Sortable list of `FileItem`s wrapped in `DndContext` + `SortableContext`. Testid `file-list`.',
-          '',
+          "Sortable list of `FileItem`s wrapped in `DndContext` + `SortableContext`. Testid `file-list`.",
+          "",
           "`FileList` owns exactly one piece of logic: translating dnd-kit's",
-          '`onDragEnd({ active, over })` into `onReorder(fromIndex, toIndex)`. Drops outside the',
-          'list (`over === null`) and drops onto self are no-ops.',
-          '',
+          "`onDragEnd({ active, over })` into `onReorder(fromIndex, toIndex)`. Drops outside the",
+          "list (`over === null`) and drops onto self are no-ops.",
+          "",
           '**A11y panel** — render a `<ul>` (or `role="listbox"` if you keep `aria-selected` on rows;',
-          'the two must agree, otherwise axe reports a required-parent violation). Give the list an',
+          "the two must agree, otherwise axe reports a required-parent violation). Give the list an",
           'accessible name such as `aria-label="Files, in PDF page order"`, and register dnd-kit\'s',
-          '`KeyboardSensor` with `sortableKeyboardCoordinates` so the handles actually reorder.',
-          '',
-          'Tailwind: `space-y-2` on the list; the container gets `rounded-xl border border-slate-200 bg-white p-3`.',
-        ].join('\n'),
+          "`KeyboardSensor` with `sortableKeyboardCoordinates` so the handles actually reorder.",
+          "",
+          "Tailwind: `space-y-2` on the list; the container gets `rounded-xl border border-slate-200 bg-white p-3`.",
+        ].join("\n"),
       },
     },
   },
@@ -73,7 +73,7 @@ export const Empty: Story = {
   args: { files: [] },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    expect(canvas.getByTestId('empty-state')).toBeInTheDocument();
+    expect(canvas.getByTestId("empty-state")).toBeInTheDocument();
     expect(canvas.queryAllByTestId(/^file-item-/)).toHaveLength(0);
   },
 };
@@ -88,7 +88,7 @@ export const ThreeFiles: Story = {
   play: async ({ canvasElement }) => {
     const items = within(canvasElement).getAllByTestId(/^file-item-/);
     expect(items).toHaveLength(3);
-    expect(items.map((el) => el.getAttribute('data-testid'))).toEqual(
+    expect(items.map((el) => el.getAttribute("data-testid"))).toEqual(
       threeFiles.map((f) => `file-item-${f.id}`),
     );
   },
@@ -100,10 +100,10 @@ export const WithActiveSelection: Story = {
   play: async ({ canvasElement }) => {
     const active = within(canvasElement)
       .getAllByTestId(/^file-item-/)
-      .filter((el) => el.getAttribute('data-active') === 'true');
+      .filter((el) => el.getAttribute("data-active") === "true");
 
     expect(active).toHaveLength(1);
-    expect(active[0]).toHaveAttribute('data-testid', `file-item-${chapterFile.id}`);
+    expect(active[0]).toHaveAttribute("data-testid", `file-item-${chapterFile.id}`);
   },
 };
 
@@ -138,7 +138,7 @@ export const ManyFiles: Story = {
     files: Array.from({ length: 12 }, (_, i) => ({
       ...introFile,
       id: `story-bulk-${i}`,
-      name: `section-${String(i + 1).padStart(2, '0')}.md`,
+      name: `section-${String(i + 1).padStart(2, "0")}.md`,
       size: 1024 * (i + 1),
     })),
   },
@@ -146,7 +146,7 @@ export const ManyFiles: Story = {
     docs: {
       description: {
         story:
-          'Tailwind: `max-h-[28rem] overflow-y-auto` on the list wrapper, with `overscroll-contain`.',
+          "Tailwind: `max-h-[28rem] overflow-y-auto` on the list wrapper, with `overscroll-contain`.",
       },
     },
   },

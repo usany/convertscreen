@@ -1,5 +1,5 @@
-import DOMPurify from 'isomorphic-dompurify';
-import { marked } from 'marked';
+import DOMPurify from "isomorphic-dompurify";
+import { marked } from "marked";
 
 /**
  * Both render paths inject HTML, so both must sanitize. This is the client one

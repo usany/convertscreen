@@ -1,6 +1,6 @@
-import '@testing-library/jest-dom/vitest';
-import { cleanup } from '@testing-library/react';
-import { afterEach, vi } from 'vitest';
+import "@testing-library/jest-dom/vitest";
+import { cleanup } from "@testing-library/react";
+import { afterEach, vi } from "vite-plus/test";
 
 afterEach(() => {
   cleanup();
@@ -18,7 +18,7 @@ if (!globalThis.ResizeObserver) {
 
 // jsdom does not implement the object-URL APIs the PDF download path uses.
 if (!URL.createObjectURL) {
-  URL.createObjectURL = vi.fn(() => 'blob:mock-url');
+  URL.createObjectURL = vi.fn(() => "blob:mock-url");
   URL.revokeObjectURL = vi.fn();
 }
 
@@ -28,7 +28,7 @@ if (!Element.prototype.scrollIntoView) {
 
 if (!globalThis.crypto?.randomUUID) {
   let seq = 0;
-  Object.defineProperty(globalThis, 'crypto', {
+  Object.defineProperty(globalThis, "crypto", {
     configurable: true,
     value: {
       ...globalThis.crypto,

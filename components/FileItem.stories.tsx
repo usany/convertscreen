@@ -1,13 +1,13 @@
-import { DndContext } from '@dnd-kit/core';
-import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import { expect, fn, within } from 'storybook/test';
+import { DndContext } from "@dnd-kit/core";
+import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { expect, fn, within } from "storybook/test";
 
-import { FileItem } from './FileItem';
-import { appendixFile, chapterFile, introFile, koreanFile, longNameFile } from './story-fixtures';
+import { FileItem } from "./FileItem";
+import { appendixFile, chapterFile, introFile, koreanFile, longNameFile } from "./story-fixtures";
 
 const meta = {
-  title: 'Converter/FileItem',
+  title: "Converter/FileItem",
   component: FileItem,
   args: {
     file: introFile,
@@ -17,29 +17,29 @@ const meta = {
     onSelect: fn(),
   },
   argTypes: {
-    file: { description: 'The `MarkdownFile` this row represents.', table: { category: 'Data' } },
+    file: { description: "The `MarkdownFile` this row represents.", table: { category: "Data" } },
     index: {
-      description: 'Zero-based position. The badge renders `index + 1` — the PDF page order.',
-      control: { type: 'number', min: 0, max: 49 },
-      table: { category: 'Data' },
+      description: "Zero-based position. The badge renders `index + 1` — the PDF page order.",
+      control: { type: "number", min: 0, max: 49 },
+      table: { category: "Data" },
     },
     isActive: {
-      description: 'Selected-for-preview marker. Sets `data-active` and `aria-selected`.',
-      control: 'boolean',
-      table: { category: 'State' },
+      description: "Selected-for-preview marker. Sets `data-active` and `aria-selected`.",
+      control: "boolean",
+      table: { category: "State" },
     },
     disabled: {
-      description: 'Disables the remove button and the drag handle.',
-      control: 'boolean',
-      table: { category: 'State' },
+      description: "Disables the remove button and the drag handle.",
+      control: "boolean",
+      table: { category: "State" },
     },
     onRemove: {
-      description: 'Called with `file.id`. Must `stopPropagation()`.',
-      table: { category: 'Events' },
+      description: "Called with `file.id`. Must `stopPropagation()`.",
+      table: { category: "Events" },
     },
     onSelect: {
-      description: 'Called with `file.id` when the row is clicked.',
-      table: { category: 'Events' },
+      description: "Called with `file.id` when the row is clicked.",
+      table: { category: "Events" },
     },
   },
   // `useSortable` reads from these contexts; without them dnd-kit warns and the handle is inert.
@@ -58,28 +58,28 @@ const meta = {
     ),
   ],
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component: [
-          'One sortable row in `FileList`.',
-          '',
-          '**Contract** — testids `file-item-${id}`, `drag-handle-${id}`, `remove-${id}`.',
+          "One sortable row in `FileList`.",
+          "",
+          "**Contract** — testids `file-item-${id}`, `drag-handle-${id}`, `remove-${id}`.",
           'Exposes `data-active="true" | "false"` on the row.',
-          '',
-          '**A11y panel** — the drag handle is a real `<button>` whose accessible name matches',
-          '`/reorder|drag|move/i` (dnd-kit keyboard reorder depends on it being focusable). The',
-          'remove button needs `aria-label={`Remove ${file.name}`}` — matching both `/remove/i`',
-          'and the filename. The row carries `aria-selected`, so it must sit inside a container',
-          'with an appropriate role (`FileList` renders a `<ul>`/`listbox`). Contrast on the',
-          'active row must stay ≥ 4.5:1.',
-          '',
-          '⚠️ Remove must `stopPropagation()` — otherwise the click bubbles to the row and also',
-          'fires `onSelect`, which `FileItem.test.tsx` explicitly forbids.',
-          '',
-          'Tailwind row: `group flex items-center gap-3 rounded-lg border border-slate-200 bg-white',
-          'p-3 shadow-sm transition-colors hover:border-slate-300`.',
-        ].join('\n'),
+          "",
+          "**A11y panel** — the drag handle is a real `<button>` whose accessible name matches",
+          "`/reorder|drag|move/i` (dnd-kit keyboard reorder depends on it being focusable). The",
+          "remove button needs `aria-label={`Remove ${file.name}`}` — matching both `/remove/i`",
+          "and the filename. The row carries `aria-selected`, so it must sit inside a container",
+          "with an appropriate role (`FileList` renders a `<ul>`/`listbox`). Contrast on the",
+          "active row must stay ≥ 4.5:1.",
+          "",
+          "⚠️ Remove must `stopPropagation()` — otherwise the click bubbles to the row and also",
+          "fires `onSelect`, which `FileItem.test.tsx` explicitly forbids.",
+          "",
+          "Tailwind row: `group flex items-center gap-3 rounded-lg border border-slate-200 bg-white",
+          "p-3 shadow-sm transition-colors hover:border-slate-300`.",
+        ].join("\n"),
       },
     },
   },
@@ -92,8 +92,8 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    expect(canvas.getByTestId(`file-item-${introFile.id}`)).toHaveAttribute('data-active', 'false');
-    expect(canvas.getByText('1')).toBeInTheDocument();
+    expect(canvas.getByTestId(`file-item-${introFile.id}`)).toHaveAttribute("data-active", "false");
+    expect(canvas.getByText("1")).toBeInTheDocument();
   },
 };
 
@@ -104,17 +104,17 @@ export const Active: Story = {
     docs: {
       description: {
         story: [
-          'Tailwind: `border-indigo-500 bg-indigo-50 ring-1 ring-indigo-500`, driven by the',
-          '`data-[active=true]:` variant. Pair the colour with a persistent left accent bar so the',
-          'state survives greyscale and colour-blind viewing.',
-        ].join('\n'),
+          "Tailwind: `border-indigo-500 bg-indigo-50 ring-1 ring-indigo-500`, driven by the",
+          "`data-[active=true]:` variant. Pair the colour with a persistent left accent bar so the",
+          "state survives greyscale and colour-blind viewing.",
+        ].join("\n"),
       },
     },
   },
   play: async ({ canvasElement }) => {
     const row = within(canvasElement).getByTestId(`file-item-${introFile.id}`);
-    expect(row).toHaveAttribute('data-active', 'true');
-    expect(row).toHaveAttribute('aria-selected', 'true');
+    expect(row).toHaveAttribute("data-active", "true");
+    expect(row).toHaveAttribute("aria-selected", "true");
   },
 };
 
@@ -125,7 +125,7 @@ export const Disabled: Story = {
     docs: {
       description: {
         story:
-          'Both the handle and the remove button carry the real `disabled` attribute — not just dimmed styling.',
+          "Both the handle and the remove button carry the real `disabled` attribute — not just dimmed styling.",
       },
     },
   },
@@ -143,7 +143,7 @@ export const LongFilename: Story = {
     docs: {
       description: {
         story:
-          'Tailwind: `min-w-0 flex-1 truncate` on the name, `shrink-0` on the badge, size and buttons.',
+          "Tailwind: `min-w-0 flex-1 truncate` on the name, `shrink-0` on the badge, size and buttons.",
       },
     },
   },
@@ -157,13 +157,13 @@ export const KoreanFilename: Story = {
 /** `formatFileSize` boundaries rendered side by side. */
 export const FileSizeVariants: Story = {
   parameters: {
-    layout: 'padded',
+    layout: "padded",
     docs: {
       description: {
         story: [
-          'B / KB / MB, top to bottom. The size is secondary information —',
-          '`text-xs tabular-nums text-slate-500` — so it never competes with the filename.',
-        ].join('\n'),
+          "B / KB / MB, top to bottom. The size is secondary information —",
+          "`text-xs tabular-nums text-slate-500` — so it never competes with the filename.",
+        ].join("\n"),
       },
     },
   },

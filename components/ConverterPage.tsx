@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useConverter } from '@/hooks/useConverter';
-import { ConvertButton } from './ConvertButton';
-import { DropZone } from './DropZone';
-import { FileList } from './FileList';
-import { PreviewArea } from './PreviewArea';
-import { StatusBanner } from './StatusBanner';
+import { useConverter } from "@/hooks/useConverter";
+import { ConvertButton } from "./ConvertButton";
+import { DropZone } from "./DropZone";
+import { FileList } from "./FileList";
+import { PreviewArea } from "./PreviewArea";
+import { StatusBanner } from "./StatusBanner";
 
 export function ConverterPage() {
   const {
@@ -21,7 +21,7 @@ export function ConverterPage() {
     dismissBanner,
   } = useConverter();
 
-  const isConverting = status === 'converting';
+  const isConverting = status === "converting";
   const activeFile = files.find((file) => file.id === activeId) ?? null;
 
   return (
@@ -35,8 +35,6 @@ export function ConverterPage() {
       </header>
 
       <DropZone onFilesAdded={addFiles} disabled={isConverting} />
-
-      <StatusBanner banner={banner} onDismiss={dismissBanner} />
 
       <div className="grid gap-6 md:grid-cols-[minmax(0,20rem)_minmax(0,1fr)]">
         <section aria-label="Files" className="flex flex-col gap-3">
@@ -56,10 +54,11 @@ export function ConverterPage() {
           <PreviewArea file={activeFile} />
         </section>
       </div>
-
       <div className="flex justify-end">
         <ConvertButton fileCount={files.length} status={status} onConvert={convert} />
       </div>
+      <StatusBanner banner={banner} onDismiss={dismissBanner} />
+
     </main>
   );
 }

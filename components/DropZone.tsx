@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { type DragEvent, type KeyboardEvent, useRef, useState } from 'react';
+import { type DragEvent, type KeyboardEvent, useRef, useState } from "react";
 
-import { ACCEPTED_EXTENSIONS, MAX_FILE_SIZE, MAX_FILES } from '@/lib/constants';
+import { ACCEPTED_EXTENSIONS, MAX_FILE_SIZE, MAX_FILES } from "@/lib/constants";
 
 export interface DropZoneProps {
   onFilesAdded: (files: File[]) => void;
@@ -47,7 +47,7 @@ export function DropZone({ onFilesAdded, disabled = false }: DropZoneProps) {
   };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    if (event.key !== 'Enter' && event.key !== ' ') return;
+    if (event.key !== "Enter" && event.key !== " ") return;
     event.preventDefault();
     openPicker();
   };
@@ -56,7 +56,7 @@ export function DropZone({ onFilesAdded, disabled = false }: DropZoneProps) {
     // biome-ignore lint/a11y/useSemanticElements: a real button cannot contain the file input, and nesting one inside would swallow the drop events
     <div
       data-testid="dropzone"
-      data-drag-active={isDragActive ? 'true' : 'false'}
+      data-drag-active={isDragActive ? "true" : "false"}
       role="button"
       tabIndex={0}
       aria-disabled={disabled}
@@ -68,19 +68,19 @@ export function DropZone({ onFilesAdded, disabled = false }: DropZoneProps) {
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
       className={[
-        'rounded-xl border-2 border-dashed border-slate-300 bg-slate-50/50 p-10 text-center',
-        'cursor-pointer transition-colors select-none hover:border-slate-400',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2',
-        'data-[drag-active=true]:border-indigo-500 data-[drag-active=true]:bg-indigo-50',
-        'data-[drag-active=true]:ring-4 data-[drag-active=true]:ring-indigo-500/10',
-        'aria-disabled:cursor-not-allowed aria-disabled:border-slate-200 aria-disabled:bg-slate-100 aria-disabled:opacity-60',
-      ].join(' ')}
+        "rounded-xl border-2 border-dashed border-slate-300 bg-slate-50/50 p-10 text-center",
+        "cursor-pointer transition-colors select-none hover:border-slate-400",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2",
+        "data-[drag-active=true]:border-indigo-500 data-[drag-active=true]:bg-indigo-50",
+        "data-[drag-active=true]:ring-4 data-[drag-active=true]:ring-indigo-500/10",
+        "aria-disabled:cursor-not-allowed aria-disabled:border-slate-200 aria-disabled:bg-slate-100 aria-disabled:opacity-60",
+      ].join(" ")}
     >
       <p className="text-base font-medium text-slate-800">
         Drag and drop markdown files here, or <span className="underline">browse</span>
       </p>
       <p className="mt-2 text-sm text-slate-500">
-        {ACCEPTED_EXTENSIONS.join(' or ')} — up to {MAX_FILES} files, {MAX_FILE_SIZE_MB} MB each
+        {ACCEPTED_EXTENSIONS.join(" or ")} — up to {MAX_FILES} files, {MAX_FILE_SIZE_MB} MB each
       </p>
 
       <input
@@ -89,7 +89,7 @@ export function DropZone({ onFilesAdded, disabled = false }: DropZoneProps) {
         data-testid="file-input"
         type="file"
         multiple
-        accept={ACCEPTED_EXTENSIONS.join(',')}
+        accept={ACCEPTED_EXTENSIONS.join(",")}
         disabled={disabled}
         onClick={(event) => event.stopPropagation()}
         onChange={(event) => {

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   closestCenter,
@@ -8,16 +8,16 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
-} from '@dnd-kit/core';
+} from "@dnd-kit/core";
 import {
   SortableContext,
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
+} from "@dnd-kit/sortable";
 
-import type { MarkdownFile } from '@/lib/types';
-import { EmptyState } from './EmptyState';
-import { FileItem } from './FileItem';
+import type { MarkdownFile } from "@/lib/types";
+import { EmptyState } from "./EmptyState";
+import { FileItem } from "./FileItem";
 
 export interface FileListProps {
   files: MarkdownFile[];

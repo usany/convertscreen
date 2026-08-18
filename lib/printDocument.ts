@@ -1,5 +1,5 @@
-import { marked } from 'marked';
-import sanitizeHtml from 'sanitize-html';
+import { marked } from "marked";
+import sanitizeHtml from "sanitize-html";
 
 export interface PrintableFile {
   name: string;
@@ -9,20 +9,20 @@ export interface PrintableFile {
 const SANITIZE_OPTIONS: sanitizeHtml.IOptions = {
   allowedTags: [
     ...sanitizeHtml.defaults.allowedTags,
-    'img',
-    'h1',
-    'h2',
-    'del',
-    'ins',
-    'sup',
-    'sub',
+    "img",
+    "h1",
+    "h2",
+    "del",
+    "ins",
+    "sup",
+    "sub",
   ],
   allowedAttributes: {
     ...sanitizeHtml.defaults.allowedAttributes,
-    img: ['src', 'alt', 'title', 'width', 'height'],
-    '*': ['class'],
+    img: ["src", "alt", "title", "width", "height"],
+    "*": ["class"],
   },
-  allowedSchemes: ['http', 'https', 'mailto', 'data'],
+  allowedSchemes: ["http", "https", "mailto", "data"],
 };
 
 /**
@@ -76,10 +76,10 @@ const PRINT_STYLESHEET = `
 
 function escapeAttribute(value: string): string {
   return value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
 
 export function buildPrintDocument(files: PrintableFile[]): string {
@@ -89,7 +89,7 @@ export function buildPrintDocument(files: PrintableFile[]): string {
       const safe = sanitizeHtml(rendered, SANITIZE_OPTIONS);
       return `<section class="md-file" data-name="${escapeAttribute(file.name)}">${safe}</section>`;
     })
-    .join('\n');
+    .join("\n");
 
   return `<!doctype html>
 <html lang="en">

@@ -1,4 +1,4 @@
-import type { MarkdownFile } from '@/lib/types';
+import type { MarkdownFile } from "@/lib/types";
 
 let seq = 0;
 
@@ -24,9 +24,9 @@ export function makeFiles(count: number, overrides: Partial<MarkdownFile> = {}):
 
 /** A real browser File, for the DropZone / useConverter paths that read from disk. */
 export function makeBrowserFile(
-  name = 'doc.md',
-  content = '# Hello',
-  type = 'text/markdown',
+  name = "doc.md",
+  content = "# Hello",
+  type = "text/markdown",
 ): File {
   return new File([content], name, { type, lastModified: 1700000000000 });
 }
@@ -47,32 +47,32 @@ export function makeDataTransfer(files: File[]) {
 
   return {
     files: fileList as unknown as FileList,
-    items: files.map((file) => ({ kind: 'file', type: file.type, getAsFile: () => file })),
-    types: ['Files'],
+    items: files.map((file) => ({ kind: "file", type: file.type, getAsFile: () => file })),
+    types: ["Files"],
     setData: () => {},
-    getData: () => '',
+    getData: () => "",
     clearData: () => {},
   };
 }
 
 /** A fetch Response stub good enough for the convert() flow. */
-export function makePdfResponse(bytes = '%PDF-1.4 fake') {
+export function makePdfResponse(bytes = "%PDF-1.4 fake") {
   return {
     ok: true,
     status: 200,
-    headers: new Headers({ 'content-type': 'application/pdf' }),
-    blob: async () => new Blob([bytes], { type: 'application/pdf' }),
+    headers: new Headers({ "content-type": "application/pdf" }),
+    blob: async () => new Blob([bytes], { type: "application/pdf" }),
   } as unknown as Response;
 }
 
-export function makeErrorResponse(status = 500, message = 'Conversion failed') {
+export function makeErrorResponse(status = 500, message = "Conversion failed") {
   return {
     ok: false,
     status,
-    headers: new Headers({ 'content-type': 'application/json' }),
+    headers: new Headers({ "content-type": "application/json" }),
     json: async () => ({ error: message }),
     text: async () => JSON.stringify({ error: message }),
-    blob: async () => new Blob([], { type: 'application/json' }),
+    blob: async () => new Blob([], { type: "application/json" }),
   } as unknown as Response;
 }
 

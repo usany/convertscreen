@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
-import type { KeyboardEvent, MouseEvent } from 'react';
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import type { KeyboardEvent, MouseEvent } from "react";
 
-import { formatFileSize } from '@/lib/format';
-import type { MarkdownFile } from '@/lib/types';
+import { formatFileSize } from "@/lib/format";
+import type { MarkdownFile } from "@/lib/types";
 
 export interface FileItemProps {
   file: MarkdownFile;
@@ -35,7 +35,7 @@ export function FileItem({
 
   const handleKeyDown = (event: KeyboardEvent<HTMLLIElement>) => {
     if (event.target !== event.currentTarget) return;
-    if (event.key !== 'Enter' && event.key !== ' ') return;
+    if (event.key !== "Enter" && event.key !== " ") return;
     event.preventDefault();
     onSelect(file.id);
   };
@@ -45,7 +45,7 @@ export function FileItem({
       ref={setNodeRef}
       style={{ transform: CSS.Translate.toString(transform), transition }}
       data-testid={`file-item-${file.id}`}
-      data-active={isActive ? 'true' : 'false'}
+      data-active={isActive ? "true" : "false"}
       // biome-ignore lint/a11y/noNoninteractiveElementToInteractiveRole: rows are the options of the parent listbox — selecting one drives the preview
       role="option"
       aria-selected={isActive}
@@ -53,14 +53,14 @@ export function FileItem({
       onClick={() => onSelect(file.id)}
       onKeyDown={handleKeyDown}
       className={[
-        'relative flex items-center gap-3 rounded-lg border bg-white py-2 pr-2 pl-4 shadow-sm',
-        'cursor-pointer transition-colors',
-        'before:absolute before:inset-y-2 before:left-0 before:w-1 before:rounded-full',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2',
-        'data-[active=false]:border-slate-200 data-[active=false]:hover:border-slate-300',
-        'data-[active=true]:border-indigo-300 data-[active=true]:bg-indigo-50/60',
-        'data-[active=true]:before:bg-indigo-600',
-      ].join(' ')}
+        "relative flex items-center gap-3 rounded-lg border bg-white py-2 pr-2 pl-4 shadow-sm",
+        "cursor-pointer transition-colors",
+        "before:absolute before:inset-y-2 before:left-0 before:w-1 before:rounded-full",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2",
+        "data-[active=false]:border-slate-200 data-[active=false]:hover:border-slate-300",
+        "data-[active=true]:border-indigo-300 data-[active=true]:bg-indigo-50/60",
+        "data-[active=true]:before:bg-indigo-600",
+      ].join(" ")}
     >
       <button
         type="button"

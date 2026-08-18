@@ -2,7 +2,7 @@ export interface EmptyStateProps {
   message?: string;
 }
 
-const DEFAULT_MESSAGE = 'No files yet. Drop markdown files above to build your document.';
+const DEFAULT_MESSAGE = "No files yet. Drop markdown files above to build your document.";
 
 export function EmptyState({ message }: EmptyStateProps) {
   return (

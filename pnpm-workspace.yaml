@@ -1,0 +1,26 @@
+packages:
+  - "."
+allowBuilds:
+  core-js: true
+  esbuild: true
+catalog:
+  vite: npm:@voidzero-dev/vite-plus-core@0.2.9
+  vitest: 4.1.10
+  vite-plus: 0.2.9
+overrides:
+  vite: "catalog:"
+  vitest: "catalog:"
+peerDependencyRules:
+  allowAny:
+    - vite
+    - vitest
+  allowedVersions:
+    vite: "*"
+    vitest: "*"
+# pnpm enforces a 1-day "minimum release age" supply-chain gate on every
+# lockfile entry by default. Exempt packages that were freshly published as
+# part of a deliberate dependency update and therefore fall inside that window.
+minimumReleaseAgeExclude:
+  - "@testing-library/user-event"
+  - electron-to-chromium
+  - marked

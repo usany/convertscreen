@@ -6,15 +6,14 @@ export interface MarkdownFile {
   content: string;
 }
 
-export type ConversionStatus = 'idle' | 'converting' | 'success' | 'error';
+export type ConversionStatus = "idle" | "converting" | "success" | "error";
 
 export type RejectionReason =
-  | 'invalid-extension'
-  | 'duplicate'
-  | 'file-too-large'
-  | 'total-too-large'
-  | 'too-many-files'
-  | 'read-error';
+  | "invalid-extension"
+  | "file-too-large"
+  | "total-too-large"
+  | "too-many-files"
+  | "read-error";
 
 export interface RejectedFile {
   name: string;
@@ -22,7 +21,7 @@ export interface RejectedFile {
 }
 
 export interface BannerState {
-  variant: 'info' | 'success' | 'error';
+  variant: "info" | "success" | "error";
   message: string;
   details?: string[];
 }
