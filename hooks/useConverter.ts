@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useState } from "react";
 
 import { REJECTION_MESSAGES } from "@/lib/constants";
 import { convertMarkdownToPdf } from "@/lib/convertMarkdownToPdf";
@@ -44,57 +44,51 @@ export function useConverter(): UseConverter {
   const [status, setStatus] = useState<ConversionStatus>("idle");
   const [banner, setBanner] = useState<BannerState | null>(null);
 
-  const addFiles = useCallback(
-    async (incoming: File[]) => {
-      const { accepted, rejected } = validateFiles(incoming, files);
-      const read = accepted.length > 0 ? await readMarkdownFiles(accepted) : [];
+  const addFiles = async (incoming: File[]) => {
+    const { accepted, rejected } = validateFiles(incoming, files);
+    const read = accepted.length > 0 ? await readMarkdownFiles(accepted) : [];
 
-      if (read.length > 0) {
-        setFiles((previous) => [...previous, ...read]);
-        setActiveId((current) => current ?? read[0].id);
-      }
+    if (read.length > 0) {
+      setFiles((previous) => [...previous, ...read]);
+      setActiveId((current) => current ?? read[0].id);
+    }
 
-      if (rejected.length === 0) {
-        setBanner(null);
-        return;
-      }
+    if (rejected.length === 0) {
+      setBanner(null);
+      return;
+    }
 
-      const noun = rejected.length === 1 ? "file" : "files";
-      setBanner(
-        read.length === 0
-          ? {
-              variant: "error",
-              message: `${rejected.length} ${noun} could not be added.`,
-              details: describe(rejected),
-            }
-          : {
-              variant: "info",
-              message: `Added ${read.length} of ${read.length + rejected.length} files.`,
-              details: describe(rejected),
-            },
-      );
-    },
-    [files],
-  );
+    const noun = rejected.length === 1 ? "file" : "files";
+    setBanner(
+      read.length === 0
+        ? {
+            variant: "error",
+            message: `${rejected.length} ${noun} could not be added.`,
+            details: describe(rejected),
+          }
+        : {
+            variant: "info",
+            message: `Added ${read.length} of ${read.length + rejected.length} files.`,
+            details: describe(rejected),
+          },
+    );
+  };
 
-  const removeFile = useCallback(
-    (id: string) => {
-      const remaining = files.filter((file) => file.id !== id);
-      setFiles(remaining);
-      if (activeId === id) setActiveId(remaining[0]?.id ?? null);
-    },
-    [files, activeId],
-  );
+  const removeFile = (id: string) => {
+    const remaining = files.filter((file) => file.id !== id);
+    setFiles(remaining);
+    if (activeId === id) setActiveId(remaining[0]?.id ?? null);
+  };
 
-  const reorder = useCallback((fromIndex: number, toIndex: number) => {
+  const reorder = (fromIndex: number, toIndex: number) => {
     setFiles((previous) => reorderFiles(previous, fromIndex, toIndex));
-  }, []);
+  };
 
-  const selectFile = useCallback((id: string) => setActiveId(id), []);
+  const selectFile = (id: string) => setActiveId(id);
 
-  const dismissBanner = useCallback(() => setBanner(null), []);
+  const dismissBanner = () => setBanner(null);
 
-  const convert = useCallback(async () => {
+  const convert = async () => {
     if (files.length === 0) return;
 
     setStatus("converting");
@@ -119,7 +113,7 @@ export function useConverter(): UseConverter {
         message: error instanceof Error ? error.message : "Conversion failed.",
       });
     }
-  }, [files]);
+  };
 
   return {
     files,

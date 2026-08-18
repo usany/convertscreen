@@ -58,7 +58,6 @@ export function ConverterPage() {
         <ConvertButton fileCount={files.length} status={status} onConvert={convert} />
       </div>
       <StatusBanner banner={banner} onDismiss={dismissBanner} />
-
     </main>
   );
 }
